@@ -7,15 +7,29 @@ namespace ProjectTempalte
         static void StackTask()
         {
             Console.WriteLine("Stack Task");
-            Console.WriteLine("Здесь пока ничего нет"); // сотрите эту строку после реализации класса Stack
+            Stack<int> st = new Stack<int>();   
+            st.Push(1); 
+            st.Push(2);
+            st.Push(3);
+            st.Push(4);
+            Console.WriteLine(st.Pop);
+            Console.WriteLine(st.Peek());
+            st.Push(123);
+
+
                                                         // и как-то протестируйте ваш код
             Console.WriteLine("-------");
         }
         static void DeepLookStackTask()
         {
             Console.WriteLine("DeepLookStack Task");
-            Console.WriteLine("Здесь пока ничего нет"); // сотрите эту строку после реализации класса DeepLookStack
-                                                        // и как-то протестируйте ваш код
+            Stack<int> st = new DeepLookStack<int>();
+            st.Push(1);
+            st.Push(2);
+            Console.WriteLine(st.Pop);
+            Console.WriteLine(st.Peek());
+            st.Push(123);
+            
             Console.WriteLine("-------");
         }
         static void QueueTask()
@@ -29,12 +43,12 @@ namespace ProjectTempalte
         static void StringTask()
         {
             Console.WriteLine("String Task");
-            Console.WriteLine("Здесь пока ничего нет"); // сотрите эту строку после выполнения условий из TODO ниже
-            // TODO: прочитать данные из файла (реализуйте и используйте функцию ReadFromFile из файла Functions.cs) и
-            // Вывести:
-            // * количество слов в тексте
-            // * самое длинное слово
-            // Можно считать, что слова разделены пробелами. Вместо явных циклов используйте LINQ.
+            List<string> lst = ReadFromFile("file.txt");
+            var longestWord = lst.Select(line => line.Split(" ")).SelectMany(word => word).Max(w => w.Length).ToString();
+            Console.WriteLine($"{longestWord}");
+            Console.WriteLine($"{longestWord.Length}");
+            foreach (var c in lst)
+                Console.WriteLine($"{c}");  
             Console.WriteLine("-------");
         }
         static void RegexTask()
@@ -87,5 +101,43 @@ namespace ProjectTempalte
             DictionaryTask();
             RecursionTask();
         }
+
+        // TODO:
+        // Функция должна прочитать содержимое файла и привести полученные строки к нижнему регистру.
+        // Также должны быть удалены знаки препинания
+        public static List<string> ReadFromFile(string filePath)
+        {
+            List<string> list = new List<string>();
+            using (var sr  = new StreamReader(filePath))
+            {
+                string s;
+                while (!sr.EndOfStream)
+                    list.Add(sr.ReadLine().ToLower());
+            }
+            return list;
+        }
+        
+
+        // TODO:
+        // Функция должная считывать и возвращать прочитанные целые числа из бинарного файла
+        List<int> ReadIntsFromBinaryFile(string path)
+        {
+            return new(); // Заглушка
+        }
+
+        // TODO:
+        // Функция должная записывать целые числа в бинарный файл
+        void WriteIntsToBinaryFile(string path, List<int> data)
+        {
+        }
+
+        int MinDigit(int n)
+        {
+            return 0; // Заглушка
+        }
+
+
+
+
     }
 }
